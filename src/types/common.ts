@@ -9,4 +9,5 @@ export type TApiResponse<T> = {
   };
   data?: T | null;
   access_token?: string | null;
+  refresh_token?: string | null;
 };

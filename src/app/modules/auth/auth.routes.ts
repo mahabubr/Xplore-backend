@@ -8,7 +8,15 @@ const router = express.Router();
 router.post(
   "/sign-up",
   ZodValidate(AuthValidator.createZodValidate),
-  AuthController.SignUp
+  AuthController.signUp
 );
+
+router.post(
+  "/sign-in",
+  ZodValidate(AuthValidator.loginZodValidate),
+  AuthController.login
+);
+
+router.post("/refresh-token", AuthController.refreshToken);
 
 export const AuthRoutes = router;

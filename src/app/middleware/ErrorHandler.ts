@@ -11,6 +11,7 @@ import {
   PrismaClientKnownRequestError,
   PrismaClientValidationError,
 } from "@prisma/client/runtime/library";
+import { Prisma } from "@prisma/client";
 
 const ErrorHandler: ErrorRequestHandler = (
   error,
@@ -26,7 +27,7 @@ const ErrorHandler: ErrorRequestHandler = (
   let message = "Something went wrong !";
   let errorMessages: iGenericErrorMessage[] = [];
 
-  if (error instanceof PrismaClientValidationError) {
+  if (error instanceof Prisma.PrismaClientValidationError) {
     const simplifiedError = handleValidationError(error);
     statusCode = simplifiedError.statusCode;
     message = simplifiedError.message;
@@ -36,7 +37,7 @@ const ErrorHandler: ErrorRequestHandler = (
     statusCode = simplifiedError.statusCode;
     message = simplifiedError.message;
     errorMessages = simplifiedError.errorMessages;
-  } else if (error instanceof PrismaClientKnownRequestError) {
+  } else if (error instanceof Prisma.PrismaClientKnownRequestError) {
     const simplifiedError = handleClientError(error);
     statusCode = simplifiedError.statusCode;
     message = simplifiedError.message;

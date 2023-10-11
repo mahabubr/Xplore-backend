@@ -7,6 +7,7 @@ const ProvideResponse = <T>(res: Response, data: TApiResponse<T>): void => {
     success: data.success,
     message: data.message,
     access_token: data.access_token || null || undefined,
+    refresh_token: data.refresh_token || null || undefined,
     data: data.data || null || undefined,
     meta: data.meta || null || undefined,
   };

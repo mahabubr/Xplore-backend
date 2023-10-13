@@ -2,7 +2,7 @@ import { z } from "zod";
 
 const createZodValidate = z.object({
   body: z.object({
-    name: z.string({ required_error: "Name is required" }),
+    name: z.string({ required_error: "Name is required" }).optional(),
     email: z
       .string({ required_error: "Email is required" })
       .email({ message: "Invalid email address" }),
@@ -13,9 +13,9 @@ const createZodValidate = z.object({
     role: z.enum(["admin", "super_admin", "tourist"], {
       required_error: "Role not match",
     }),
-    phone: z.string({ required_error: "Phone number is required" }),
-    address: z.string({ required_error: "Address is required" }),
-    image: z.string({ required_error: "Image number is required" }),
+    phone: z.string({ required_error: "Phone number is required" }).optional(),
+    address: z.string({ required_error: "Address is required" }).optional(),
+    image: z.string({ required_error: "Image number is required" }).optional(),
   }),
 });
 

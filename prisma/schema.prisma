@@ -12,22 +12,88 @@ datasource db {
 
 model User {
   id       String    @id @default(uuid())
-  name     String
-  email    String    @unique
+  name     String?
+  email    String
   password String
   role     UserRoles
-  phone    String    @unique
-  address  String
-  image    String
+  phone    String?
+  address  String?
+  image    String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  review  Review[]
+  booking Booking[]
+
   @@map("users")
+}
+
+model Services {
+  id          String       @id @default(uuid())
+  title       String
+  description String
+  image       String
+  price       Float
+  personLimit Int
+  contact     String
+  location    String
+  available   ServiceAvail
+  startDate   DateTime
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  review  Review[]
+  booking Booking[]
+
+  @@map("services")
+}
+
+model Review {
+  id String @id @default(uuid())
+
+  scale       Float
+  description String
+
+  userId String
+  user   User   @relation(references: [id], fields: [userId])
+
+  serviceId String
+  service   Services @relation(references: [id], fields: [serviceId])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("reviews")
+}
+
+model Booking {
+  id        String   @id @default(uuid())
+  date_from DateTime
+  date_to   DateTime
+  member    Int
+  how_day   Int
+
+  userId String
+  user   User   @relation(references: [id], fields: [userId])
+
+  serviceId String
+  service   Services @relation(references: [id], fields: [serviceId])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("bookings")
 }
 
 enum UserRoles {
   admin
   super_admin
   tourist
+}
+
+enum ServiceAvail {
+  AVAILABLE
+  UPCOMING
 }

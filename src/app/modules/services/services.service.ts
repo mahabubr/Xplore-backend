@@ -38,6 +38,7 @@ const getServices = async (
     minPrice,
     availabilityType,
     location,
+    month,
   } = filters;
 
   const whereConditions: Prisma.ServicesWhereInput = {};
@@ -78,6 +79,11 @@ const getServices = async (
   if (availabilityType) {
     whereConditions.availabilityType = {
       equals: availabilityType,
+    };
+  }
+  if (month) {
+    whereConditions.how_month = {
+      equals: month,
     };
   }
 

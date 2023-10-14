@@ -34,7 +34,7 @@ model Services {
   title            String
   day              Int
   age              Int
-  how_month        String[]
+  how_month        String
   availability     Int
   departure        String
   departureTime    String

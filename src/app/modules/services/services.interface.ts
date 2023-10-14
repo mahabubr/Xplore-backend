@@ -6,4 +6,5 @@ export interface iServicesOptions {
   maxPrice?: number;
   availabilityType?: "UPCOMING" | "AVAILABLE";
   location?: string;
+  month?: string;
 }

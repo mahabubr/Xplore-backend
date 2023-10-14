@@ -13,6 +13,7 @@ export const servicesFilterableFields = [
   "maxPrice",
   "availabilityType",
   "location",
+  "month"
 ];
 
 export const servicesPaginationOptions = [

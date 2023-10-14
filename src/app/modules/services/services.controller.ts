@@ -3,6 +3,11 @@ import AsyncCatch from "../../../shared/AsyncCatch";
 import ProvideResponse from "../../../shared/ProviceResponse";
 import httpStatus from "http-status";
 import { ServicesService } from "./services.service";
+import pick from "../../../shared/pick";
+import {
+  servicesFilterableFields,
+  servicesPaginationOptions,
+} from "./services.constants";
 
 const createService = AsyncCatch(async (req: Request, res: Response) => {
   const { ...serviceData } = req.body;
@@ -18,7 +23,10 @@ const createService = AsyncCatch(async (req: Request, res: Response) => {
 });
 
 const getServices = AsyncCatch(async (req: Request, res: Response) => {
-  const result = await ServicesService.getServices();
+  const filters = pick(req.query, servicesFilterableFields);
+  const pagOptions = pick(req.query, servicesPaginationOptions);
+
+  const result = await ServicesService.getServices(filters, pagOptions);
 
   ProvideResponse(res, {
     statusCode: httpStatus.OK,

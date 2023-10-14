@@ -45,7 +45,7 @@ model Services {
   long             String
   description      String
   image            String
-  price            String
+  price            Float
   availabilityType ServiceAvail
   location         String
 

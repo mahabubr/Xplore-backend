@@ -34,7 +34,7 @@ const signUp = async (payload: User): Promise<Partial<User>> => {
 };
 
 const login = async (payload: iLogin) => {
-  const isExistUser = await prisma.user.findUnique({
+  const isExistUser = await prisma.user.findFirst({
     where: {
       email: payload.email,
     },

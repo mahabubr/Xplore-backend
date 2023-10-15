@@ -1,10 +1,28 @@
 import express from "express";
 import { CartController } from "./cart.controller";
+import auth from "../../middleware/auth";
+import { EAuthGuardRoles } from "../../../enums/AuthGuard";
 
 const router = express.Router();
 
-router.post("/", CartController.addToCart);
+router.post(
+  "/",
+  auth(
+    EAuthGuardRoles.ADMIN,
+    EAuthGuardRoles.SUPER_ADMIN,
+    EAuthGuardRoles.TOURIST
+  ),
+  CartController.addToCart
+);
 
-router.get("/", CartController.getAllCart);
+router.get(
+  "/",
+  auth(
+    EAuthGuardRoles.ADMIN,
+    EAuthGuardRoles.SUPER_ADMIN,
+    EAuthGuardRoles.TOURIST
+  ),
+  CartController.getAllCart
+);
 
 export const CartRoutes = router;

@@ -24,8 +24,8 @@ model User {
   updatedAt DateTime @updatedAt
 
   review  Review[]
-  booking Booking[]
   cart    Cart[]
+  booking Booking[]
 
   @@map("users")
 }
@@ -54,10 +54,8 @@ model Services {
   updatedAt DateTime @updatedAt
 
   review  Review[]
-  booking Booking[]
   cart    Cart[]
-
-  @@map("services")
+  booking Booking[]
 }
 
 model Review {
@@ -74,16 +72,16 @@ model Review {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  @@map("reviews")
 }
 
 model Booking {
-  id        String   @id @default(uuid())
-  date_from DateTime
-  date_to   DateTime
-  member    Int
+  id        String @id @default(uuid())
+  date_from String
+  date_to   String
   how_day   Int
+  adult     Int
+  child     Int
+  infant    Int
 
   userId String
   user   User   @relation(references: [id], fields: [userId])
@@ -93,8 +91,6 @@ model Booking {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  @@map("bookings")
 }
 
 model Cart {
@@ -108,8 +104,6 @@ model Cart {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  @@map("carts")
 }
 
 enum UserRoles {

@@ -11,25 +11,9 @@ router.post(
   ServicesController.createService
 );
 
-router.get(
-  "/",
-  auth(
-    EAuthGuardRoles.ADMIN,
-    EAuthGuardRoles.SUPER_ADMIN,
-    EAuthGuardRoles.TOURIST
-  ),
-  ServicesController.getServices
-);
+router.get("/", ServicesController.getServices);
 
-router.get(
-  "/:id",
-  auth(
-    EAuthGuardRoles.ADMIN,
-    EAuthGuardRoles.SUPER_ADMIN,
-    EAuthGuardRoles.TOURIST
-  ),
-  ServicesController.getSingleService
-);
+router.get("/:id", ServicesController.getSingleService);
 
 router.patch(
   "/:id",

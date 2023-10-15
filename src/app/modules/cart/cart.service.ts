@@ -9,8 +9,14 @@ const addToCart = async (payload: Cart) => {
   return result;
 };
 
-const getAllCart = async (): Promise<Cart[]> => {
+const getAllCart = async (user: any): Promise<Cart[]> => {
+  const id = user.id;
   const result = await prisma.cart.findMany({
+    where: {
+      user: {
+        id: id,
+      },
+    },
     include: {
       service: true,
       user: true,

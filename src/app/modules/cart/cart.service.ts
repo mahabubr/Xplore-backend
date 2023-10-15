@@ -15,6 +15,9 @@ const getAllCart = async (): Promise<Cart[]> => {
       service: true,
       user: true,
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 
   return result;

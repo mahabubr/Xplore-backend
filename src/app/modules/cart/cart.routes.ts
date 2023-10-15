@@ -25,4 +25,14 @@ router.get(
   CartController.getAllCart
 );
 
+router.delete(
+  "/:id",
+  auth(
+    EAuthGuardRoles.ADMIN,
+    EAuthGuardRoles.SUPER_ADMIN,
+    EAuthGuardRoles.TOURIST
+  ),
+  CartController.removeCart
+);
+
 export const CartRoutes = router;

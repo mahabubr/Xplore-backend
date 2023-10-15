@@ -29,7 +29,18 @@ const getAllCart = async (user: any): Promise<Cart[]> => {
   return result;
 };
 
+const removeCart = async (id: string): Promise<Cart> => {
+  const result = await prisma.cart.delete({
+    where: {
+      id,
+    },
+  });
+
+  return result;
+};
+
 export const CartServices = {
   addToCart,
   getAllCart,
+  removeCart,
 };

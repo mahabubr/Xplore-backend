@@ -30,7 +30,22 @@ const getAllCart = AsyncCatch(async (req: Request, res: Response) => {
   });
 });
 
+const removeCart = AsyncCatch(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  console.log(id);
+
+  const result = await CartServices.removeCart(id);
+
+  ProvideResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Cart Deleted Successful",
+    data: result,
+  });
+});
+
 export const CartController = {
   addToCart,
   getAllCart,
+  removeCart,
 };

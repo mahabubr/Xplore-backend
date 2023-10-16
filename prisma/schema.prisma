@@ -23,9 +23,10 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  review  Review[]
-  cart    Cart[]
-  booking Booking[]
+  review   Review[]
+  cart     Cart[]
+  booking  Booking[]
+  feedback Feedback[]
 
   @@map("users")
 }
@@ -102,6 +103,17 @@ model Cart {
 
   serviceId String
   service   Services @relation(references: [id], fields: [serviceId])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Feedback {
+  id          String @id @default(uuid())
+  description String
+
+  userId String
+  user   User   @relation(references: [id], fields: [userId])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

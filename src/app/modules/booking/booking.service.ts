@@ -25,7 +25,17 @@ const getBooking = async (
   const { limit, page, skip } =
     paginationHelpers.calculatePagination(pagOptions);
 
-  const result = await prisma.booking.findMany({ skip, take: limit });
+  const result = await prisma.booking.findMany({
+    skip,
+    take: limit,
+    include: {
+      service: true,
+      user: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 
   const total = await prisma.booking.count();
 
@@ -52,8 +62,15 @@ const getUserByBooking = async (
         id: user.id,
       },
     },
+    include: {
+      service: true,
+      user: true,
+    },
     skip,
     take: limit,
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 
   const total = await prisma.booking.count({

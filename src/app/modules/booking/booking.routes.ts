@@ -15,6 +15,17 @@ router.post(
   BookingController.createBooking
 );
 
+router.get(
+  "/",
+  auth(EAuthGuardRoles.ADMIN, EAuthGuardRoles.SUPER_ADMIN),
+  BookingController.getBooking
+);
+router.get(
+  "/user-by",
+  auth(EAuthGuardRoles.TOURIST),
+  BookingController.getUserByBooking
+);
+
 router.delete(
   "/:id",
   auth(

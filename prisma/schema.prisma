@@ -75,13 +75,14 @@ model Review {
 }
 
 model Booking {
-  id        String @id @default(uuid())
+  id        String        @id @default(uuid())
   date_from String
   date_to   String
   how_day   Int
   adult     Int
   child     Int
   infant    Int
+  status    BookingStatus @default(PENDING)
 
   userId String
   user   User   @relation(references: [id], fields: [userId])
@@ -115,4 +116,10 @@ enum UserRoles {
 enum ServiceAvail {
   AVAILABLE
   UPCOMING
+}
+
+enum BookingStatus {
+  PENDING
+  APPROVED
+  REJECTED
 }

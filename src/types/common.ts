@@ -4,7 +4,7 @@ export type TApiResponse<T> = {
   message: string;
   meta?: {
     page: number;
-    size: number;
+    limit: number;
     total: number;
   };
   data?: T | null;

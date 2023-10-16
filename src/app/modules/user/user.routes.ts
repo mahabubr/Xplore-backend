@@ -31,4 +31,10 @@ router.patch(
   UserController.updateUser
 );
 
+router.patch(
+  "/update-role/:id",
+  auth(EAuthGuardRoles.ADMIN, EAuthGuardRoles.SUPER_ADMIN),
+  UserController.updateRole
+);
+
 export const UserRoutes = router;

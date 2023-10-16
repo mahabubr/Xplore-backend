@@ -4,7 +4,7 @@ import { userServices } from "./user.service";
 import ProvideResponse from "../../../shared/ProviceResponse";
 import httpStatus from "http-status";
 import pick from "../../../shared/pick";
-import { userPaginationOptions } from "./user.constants";
+import { userFilterableFields, userPaginationOptions } from "./user.constants";
 
 const getUserProfile = AsyncCatch(async (req: Request, res: Response) => {
   const user = req.user;
@@ -21,8 +21,9 @@ const getUserProfile = AsyncCatch(async (req: Request, res: Response) => {
 
 const getAllUser = AsyncCatch(async (req: Request, res: Response) => {
   const pagOptions = pick(req.query, userPaginationOptions);
+  const filters = pick(req.query, userFilterableFields);
 
-  const result = await userServices.getAllUser(pagOptions);
+  const result = await userServices.getAllUser(pagOptions, filters);
 
   ProvideResponse(res, {
     statusCode: httpStatus.OK,
@@ -47,8 +48,23 @@ const updateUser = AsyncCatch(async (req: Request, res: Response) => {
   });
 });
 
+const updateRole = AsyncCatch(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { role } = req.body;
+
+  const result = await userServices.updateRole(id, {role});
+
+  ProvideResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Role Update Successful",
+    data: result,
+  });
+});
+
 export const UserController = {
   getUserProfile,
   updateUser,
   getAllUser,
+  updateRole,
 };

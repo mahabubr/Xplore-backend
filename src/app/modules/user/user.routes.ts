@@ -15,4 +15,14 @@ router.get(
   UserController.getUserProfile
 );
 
+router.patch(
+  "/",
+  auth(
+    EAuthGuardRoles.ADMIN,
+    EAuthGuardRoles.SUPER_ADMIN,
+    EAuthGuardRoles.TOURIST
+  ),
+  UserController.updateUser
+);
+
 export const UserRoutes = router;

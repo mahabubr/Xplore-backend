@@ -3,7 +3,6 @@ import AsyncCatch from "../../../shared/AsyncCatch";
 import { userServices } from "./user.service";
 import ProvideResponse from "../../../shared/ProviceResponse";
 import httpStatus from "http-status";
-import { iAuthJWT } from "../../../types/userTypes";
 
 const getUserProfile = AsyncCatch(async (req: Request, res: Response) => {
   const user = req.user;
@@ -18,6 +17,21 @@ const getUserProfile = AsyncCatch(async (req: Request, res: Response) => {
   });
 });
 
+const updateUser = AsyncCatch(async (req: Request, res: Response) => {
+  const { ...userData } = req.body;
+  const user = req.user;
+
+  const result = await userServices.updateUser(userData, user);
+
+  ProvideResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Profile Update Successful",
+    data: result,
+  });
+});
+
 export const UserController = {
   getUserProfile,
+  updateUser,
 };

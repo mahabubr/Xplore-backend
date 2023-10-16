@@ -22,7 +22,7 @@ const routes = [
     route: ServicesRoutes,
   },
   {
-    path: "/ratting",
+    path: "/reviews",
     route: ReviewsRoutes,
   },
   {

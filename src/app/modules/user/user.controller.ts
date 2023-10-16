@@ -34,6 +34,32 @@ const getAllUser = AsyncCatch(async (req: Request, res: Response) => {
   });
 });
 
+const getSingleUserById = AsyncCatch(async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  const result = await userServices.getSingleUserById(id);
+
+  ProvideResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "User Get Successful",
+    data: result,
+  });
+});
+const updateSingleUserById = AsyncCatch(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { ...updatedData } = req.body;
+
+  const result = await userServices.updateSingleUserById(id, updatedData);
+
+  ProvideResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "User Update Successful",
+    data: result,
+  });
+});
+
 const updateUser = AsyncCatch(async (req: Request, res: Response) => {
   const { ...userData } = req.body;
   const user = req.user;
@@ -52,7 +78,7 @@ const updateRole = AsyncCatch(async (req: Request, res: Response) => {
   const { id } = req.params;
   const { role } = req.body;
 
-  const result = await userServices.updateRole(id, {role});
+  const result = await userServices.updateRole(id, { role });
 
   ProvideResponse(res, {
     statusCode: httpStatus.OK,
@@ -67,4 +93,6 @@ export const UserController = {
   updateUser,
   getAllUser,
   updateRole,
+  getSingleUserById,
+  updateSingleUserById,
 };

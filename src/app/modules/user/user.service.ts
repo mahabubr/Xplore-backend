@@ -59,6 +59,30 @@ const getAllUser = async (
   };
 };
 
+const getSingleUserById = async (id: string): Promise<User | null> => {
+  const result = await prisma.user.findFirst({
+    where: {
+      id,
+    },
+  });
+
+  return result;
+};
+
+const updateSingleUserById = async (
+  id: string,
+  payload: Partial<User>
+): Promise<User | null> => {
+  const result = await prisma.user.update({
+    where: {
+      id,
+    },
+    data: payload,
+  });
+
+  return result;
+};
+
 const updateUser = async (payload: Partial<User>, user: any): Promise<User> => {
   const { id } = user;
 
@@ -88,4 +112,6 @@ export const userServices = {
   updateUser,
   getAllUser,
   updateRole,
+  getSingleUserById,
+  updateSingleUserById,
 };

@@ -21,6 +21,26 @@ router.get(
   UserController.getAllUser
 );
 
+router.get(
+  "/:id",
+  auth(
+    EAuthGuardRoles.ADMIN,
+    EAuthGuardRoles.SUPER_ADMIN,
+    EAuthGuardRoles.TOURIST
+  ),
+  UserController.getSingleUserById
+);
+
+router.patch(
+  "/update-single/:id",
+  auth(
+    EAuthGuardRoles.ADMIN,
+    EAuthGuardRoles.SUPER_ADMIN,
+    EAuthGuardRoles.TOURIST
+  ),
+  UserController.updateSingleUserById
+);
+
 router.patch(
   "/",
   auth(

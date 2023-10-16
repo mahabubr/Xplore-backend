@@ -15,6 +15,12 @@ router.get(
   UserController.getUserProfile
 );
 
+router.get(
+  "/",
+  auth(EAuthGuardRoles.ADMIN, EAuthGuardRoles.SUPER_ADMIN),
+  UserController.getAllUser
+);
+
 router.patch(
   "/",
   auth(

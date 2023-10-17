@@ -26,6 +26,18 @@ router.get(
   BookingController.getUserByBooking
 );
 
+router.patch(
+  "/:id",
+  auth(EAuthGuardRoles.ADMIN, EAuthGuardRoles.SUPER_ADMIN),
+  BookingController.updateBookingByStatus
+);
+
+router.patch(
+  "/schedule/:id",
+  auth(EAuthGuardRoles.ADMIN, EAuthGuardRoles.SUPER_ADMIN),
+  BookingController.updateBookingSchedule
+);
+
 router.delete(
   "/:id",
   auth(

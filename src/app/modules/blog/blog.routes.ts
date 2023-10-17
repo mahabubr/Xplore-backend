@@ -26,13 +26,13 @@ router.get(
 router.patch(
   "/:id",
   auth(EAuthGuardRoles.SUPER_ADMIN, EAuthGuardRoles.ADMIN),
-  BlogController.createBlog
+  BlogController.updateBlog
 );
 
 router.delete(
   "/:id",
   auth(EAuthGuardRoles.SUPER_ADMIN, EAuthGuardRoles.ADMIN),
-  BlogController.createBlog
+  BlogController.deleteBlog
 );
 
 export const BlogRoutes = router;

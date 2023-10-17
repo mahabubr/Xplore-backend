@@ -4,6 +4,12 @@ CREATE TYPE "UserRoles" AS ENUM ('admin', 'super_admin', 'tourist');
 -- CreateEnum
 CREATE TYPE "ServiceAvail" AS ENUM ('AVAILABLE', 'UPCOMING');
 
+-- CreateEnum
+CREATE TYPE "BookingStatus" AS ENUM ('PENDING', 'APPROVED', 'REJECTED');
+
+-- CreateEnum
+CREATE TYPE "ServiceCategory" AS ENUM ('luxury', 'travel', 'backpacking', 'road', 'trips', 'volunteer', 'educational', 'medical', 'religious', 'tourism', 'pilgrimage', 'honeymoon');
+
 -- CreateTable
 CREATE TABLE "users" (
     "id" TEXT NOT NULL,
@@ -40,6 +46,7 @@ CREATE TABLE "Services" (
     "price" DOUBLE PRECISION NOT NULL,
     "availabilityType" "ServiceAvail" NOT NULL,
     "location" TEXT NOT NULL,
+    "category" "ServiceCategory" NOT NULL DEFAULT 'luxury',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -68,6 +75,7 @@ CREATE TABLE "Booking" (
     "adult" INTEGER NOT NULL,
     "child" INTEGER NOT NULL,
     "infant" INTEGER NOT NULL,
+    "status" "BookingStatus" NOT NULL DEFAULT 'PENDING',
     "userId" TEXT NOT NULL,
     "serviceId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -87,6 +95,17 @@ CREATE TABLE "Cart" (
     CONSTRAINT "Cart_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "Feedback" (
+    "id" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Feedback_pkey" PRIMARY KEY ("id")
+);
+
 -- AddForeignKey
 ALTER TABLE "Review" ADD CONSTRAINT "Review_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
@@ -104,3 +123,6 @@ ALTER TABLE "Cart" ADD CONSTRAINT "Cart_userId_fkey" FOREIGN KEY ("userId") REFE
 
 -- AddForeignKey
 ALTER TABLE "Cart" ADD CONSTRAINT "Cart_serviceId_fkey" FOREIGN KEY ("serviceId") REFERENCES "Services"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Feedback" ADD CONSTRAINT "Feedback_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

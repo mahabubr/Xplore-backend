@@ -7,4 +7,5 @@ export interface iServicesOptions {
   availabilityType?: "UPCOMING" | "AVAILABLE";
   location?: string;
   month?: string;
+  category?: string;
 }

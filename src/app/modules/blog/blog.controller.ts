@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import AsyncCatch from "../../../shared/AsyncCatch";
-import { BlogServices } from "./blog.services";
+import { BlogServices } from "./blog.service";
 import ProvideResponse from "../../../shared/ProviceResponse";
 import httpStatus from "http-status";
 

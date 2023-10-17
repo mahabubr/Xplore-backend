@@ -129,6 +129,15 @@ model Blog {
   updatedAt DateTime @updatedAt
 }
 
+model FAQ {
+  id          String @id @default(uuid())
+  title       String
+  description String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 enum UserRoles {
   admin
   super_admin

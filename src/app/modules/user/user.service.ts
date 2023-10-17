@@ -1,5 +1,4 @@
-import { Booking, Prisma, User } from "@prisma/client";
-import { iAuthJWT } from "../../../types/userTypes";
+import { Prisma, User, UserRoles } from "@prisma/client";
 import prisma from "../../instance/prisma";
 import {
   iGenericResponse,
@@ -21,11 +20,11 @@ const getUserProfile = async (user: any): Promise<User | null> => {
 
 const getAllUser = async (
   pagOptions: iPaginationOptions,
-  filters: { searchTerm?: string }
+  filters: { searchTerm?: string; role?: string }
 ): Promise<iGenericResponse<User[]>> => {
   const { limit, page, skip } =
     paginationHelpers.calculatePagination(pagOptions);
-  const { searchTerm } = filters;
+  const { searchTerm, role } = filters;
 
   const whereConditions: Prisma.UserWhereInput = {};
 
@@ -36,6 +35,12 @@ const getAllUser = async (
         mode: "insensitive",
       },
     }));
+  }
+
+  if (role) {
+    whereConditions.role = {
+      equals: role as UserRoles,
+    };
   }
 
   const result = await prisma.user.findMany({
@@ -107,6 +112,16 @@ const updateRole = async (id: string, role: {}) => {
   return result;
 };
 
+const deleteUser = async (id: string) => {
+  const result = await prisma.user.delete({
+    where: {
+      id,
+    },
+  });
+
+  return result;
+};
+
 export const userServices = {
   getUserProfile,
   updateUser,
@@ -114,4 +129,5 @@ export const userServices = {
   updateRole,
   getSingleUserById,
   updateSingleUserById,
+  deleteUser,
 };

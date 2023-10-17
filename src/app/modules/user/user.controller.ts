@@ -87,6 +87,18 @@ const updateRole = AsyncCatch(async (req: Request, res: Response) => {
     data: result,
   });
 });
+const deleteUser = AsyncCatch(async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  const result = await userServices.deleteUser(id);
+
+  ProvideResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "User Deleted Successful",
+    data: result,
+  });
+});
 
 export const UserController = {
   getUserProfile,
@@ -95,4 +107,5 @@ export const UserController = {
   updateRole,
   getSingleUserById,
   updateSingleUserById,
+  deleteUser,
 };

@@ -57,4 +57,10 @@ router.patch(
   UserController.updateRole
 );
 
+router.delete(
+  "/:id",
+  auth(EAuthGuardRoles.ADMIN, EAuthGuardRoles.SUPER_ADMIN),
+  UserController.deleteUser
+);
+
 export const UserRoutes = router;

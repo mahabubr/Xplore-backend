@@ -11,11 +11,7 @@ router.post(
   BlogController.createBlog
 );
 
-router.get(
-  "/",
-  auth(EAuthGuardRoles.SUPER_ADMIN, EAuthGuardRoles.ADMIN),
-  BlogController.getAllBlog
-);
+router.get("/", BlogController.getAllBlog);
 
 router.get(
   "/:id",

@@ -11,11 +11,7 @@ router.post(
   FAQController.createFAQ
 );
 
-router.get(
-  "/",
-  auth(EAuthGuardRoles.SUPER_ADMIN, EAuthGuardRoles.ADMIN),
-  FAQController.getAllFAQ
-);
+router.get("/", FAQController.getAllFAQ);
 
 router.get(
   "/:id",

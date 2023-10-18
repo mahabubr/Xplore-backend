@@ -11,4 +11,6 @@ router.post(
   FeedbackController.createFeedback
 );
 
+router.get("/", FeedbackController.getFeedback);
+
 export const FeedbackRoutes = router;

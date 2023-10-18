@@ -32,7 +32,7 @@ model User {
 }
 
 model Services {
-  id               String          @id @default(uuid())
+  id               String       @id @default(uuid())
   title            String
   day              Int
   age              Int
@@ -50,7 +50,7 @@ model Services {
   price            Float
   availabilityType ServiceAvail
   location         String
-  category         ServiceCategory @default(luxury)
+  category         String       @default("luxury")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

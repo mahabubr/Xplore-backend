@@ -17,7 +17,18 @@ const createFeedback = AsyncCatch(async (req: Request, res: Response) => {
     data: result,
   });
 });
+const getFeedback = AsyncCatch(async (req: Request, res: Response) => {
+  const result = await FeedbackServices.getFeedback();
+
+  ProvideResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Fetch Feedback",
+    data: result,
+  });
+});
 
 export const FeedbackController = {
   createFeedback,
+  getFeedback,
 };

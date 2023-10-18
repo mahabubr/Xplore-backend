@@ -3,6 +3,7 @@ export const servicesSearchableFields = [
   "departure",
   "description",
   "location",
+  "category",
 ];
 
 export const servicesFilterableFields = [

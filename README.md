@@ -1,4 +1,4 @@
-# Travel Agency Website - README
+# Xplore - Travel Agency Website / Backend - README
 
 Credentials Super Admin:
 email : superadmin@xplore.com
